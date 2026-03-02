@@ -1,0 +1,613 @@
+/* global resets and variables */
+
+:root {
+    --primary-color: #008751;
+    /* Green */
+    --primary-dark: #005e38;
+    --secondary-color: #FDDB6D;
+    /* Yellow */
+    --accent-color: #D21034;
+    /* Red */
+    --dark-bg: #0f172a;
+    --light-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --transition: cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-main);
+    background-color: var(--light-bg);
+    line-height: 1.6;
+    position: relative;
+}
+
+#root {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+main {
+    padding-top: 100px;
+    /* Espace généreux pour toutes les pages */
+}
+
+/* Base Layout & Centering - Fixed Bootstrap Gutter issues */
+.container,
+.container-fluid {
+    width: 100% !important;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px !important;
+    margin-left: -15px !important;
+}
+
+section {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+    /* Prevent AOS child overflow */
+}
+
+
+.navbar {
+    background: transparent;
+    padding: 1.25rem 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.navbar.scrolled {
+    padding: 0.6rem 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+.navbar-brand img {
+    height: 55px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: var(--transition);
+}
+
+.nav-link {
+    color: var(--white) !important;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem !important;
+    margin: 0 0.25rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.navbar.scrolled .nav-link {
+    color: var(--text-main) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1.25rem;
+    right: 1.25rem;
+    height: 2px;
+    background: var(--secondary-color);
+    transform: scaleX(0);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--secondary-color) !important;
+}
+
+/* Hero Section */
+.hero {
+    margin-top: -100px;
+    /* Match le padding du main pour coller au haut */
+    padding-top: 100px;
+    /* Redonne de l'espace interne pour l'alignement du contenu */
+    height: 90vh;
+    background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)),
+        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    clip-path: ellipse(150% 100% at 50% 0%);
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 8vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero p {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    opacity: 0.9;
+}
+
+.hero-buttons .btn {
+    padding: 0.8rem 2.5rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: none;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    box-shadow: 0 10px 15px -3px rgba(0, 135, 81, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 135, 81, 0.4);
+}
+
+/* Section Title */
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.section-title p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+/* General Card Style */
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Match Card */
+.match-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.match-teams {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.team-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    padding: 10px;
+    background: #f1f5f9;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.match-score-badge {
+    background: #f1f5f9;
+    padding: 0.5rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Players - Grid Centering */
+.player-card {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.player-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 24px;
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+    border: 4px solid #fff;
+    box-shadow: var(--shadow-md);
+}
+
+.player-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* News Section */
+.news-card {
+    border: none;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.news-card .card-img-top {
+    border-radius: 15px;
+    height: 220px;
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.news-date {
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+    display: block;
+}
+
+.news-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+}
+
+/* Shop Overhaul Styles */
+.shop-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.shop-card .card-img-top {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    padding: 0;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.shop-card .card-body {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.shop-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.product-price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 1.25rem;
+}
+
+.product-badge {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: var(--accent-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.btn-add-to-cart {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: var(--transition);
+    margin-top: auto;
+}
+
+.btn-add-to-cart:hover {
+    background: var(--primary-dark);
+    transform: scale(1.02);
+}
+
+/* Cart Drawer Styles */
+.cart-item-img img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    background: #f1f5f9;
+}
+
+.quantity-controls .btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    border-radius: 6px;
+}
+
+/* Product Modal Styles */
+.size-btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 8px !important;
+}
+
+.size-btn.active {
+    background: var(--primary-color) !important;
+    color: white !important;
+    border-color: var(--primary-color) !important;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+.footer {
+    background: var(--dark-bg);
+    color: var(--white);
+    padding: 100px 0 50px;
+    font-size: 0.95rem;
+}
+
+.footer-logo {
+    height: 60px;
+    margin-bottom: 2rem;
+    filter: brightness(0) invert(1);
+}
+
+.footer h5 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer h5::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 1rem;
+}
+
+.footer-links a,
+.footer-links li {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+    padding-left: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.social-links a {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-5px);
+    color: white;
+}
+
+.newsletter-box .form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px 0 0 12px;
+}
+
+.newsletter-box .form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+    border-color: var(--primary-color);
+}
+
+.newsletter-box .btn {
+    border-radius: 0 12px 12px 0;
+    padding: 0 1.5rem;
+}
+
+.copyright {
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+}
+
+/* Animations from AOS are used, but we can add some custom ones */
+@keyframes soft-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Grid Improvements */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .hero {
+        height: auto;
+        padding: 120px 0 80px;
+        clip-path: none;
+    }
+
+    .match-teams {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+.breadcrumb-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: var(--text-light);
+}
